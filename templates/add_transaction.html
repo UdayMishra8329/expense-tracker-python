@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}Add Transaction{% endblock %}
+
+{% block content %}
+<div class="main-content" style="max-width: 640px;">
+    <div class="page-header">
+        <h1>Add Transaction 💳</h1>
+        <p>Record a new income or expense</p>
+    </div>
+
+    <div class="glass-card" style="padding: 2rem; animation: slideUp 0.5s ease-out;">
+        <form method="POST" action="{{ url_for('add_transaction') }}">
+            <!-- Type Toggle -->
+            <div class="type-toggle">
+                <input type="radio" name="type" value="expense" id="type-expense" checked>
+                <label for="type-expense">📉 Expense</label>
+                <input type="radio" name="type" value="income" id="type-income">
+                <label for="type-income">📈 Income</label>
+            </div>
+
+            <!-- Amount & Date Row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="amount">Amount (₹)</label>
+                    <input
+                        type="number"
+                        id="amount"
+                        name="amount"
+                        class="form-input"
+                        placeholder="0.00"
+                        step="0.01"
+                        min="0.01"
+                        required
+                        autofocus
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        class="form-input"
+                        value="{{ today }}"
+                        required
+                    >
+                </div>
+            </div>
+
+            <!-- Category -->
+            <div class="form-group">
+                <label>Category</label>
+                <div class="category-pills" id="category-pills">
+                    <!-- Expense categories -->
+                    <input type="radio" name="category" value="Food & Dining" id="cat-food">
+                    <label for="cat-food" class="category-pill">🍔 Food & Dining</label>
+
+                    <input type="radio" name="category" value="Transport" id="cat-transport">
+                    <label for="cat-transport" class="category-pill">🚗 Transport</label>
+
+                    <input type="radio" name="category" value="Shopping" id="cat-shopping">
+                    <label for="cat-shopping" class="category-pill">🛍️ Shopping</label>
+
+                    <input type="radio" name="category" value="Bills & Utilities" id="cat-bills">
+                    <label for="cat-bills" class="category-pill">💡 Bills & Utilities</label>
+
+                    <input type="radio" name="category" value="Entertainment" id="cat-entertainment">
+                    <label for="cat-entertainment" class="category-pill">🎬 Entertainment</label>
+
+                    <input type="radio" name="category" value="Health" id="cat-health">
+                    <label for="cat-health" class="category-pill">🏥 Health</label>
+
+                    <input type="radio" name="category" value="Education" id="cat-education">
+                    <label for="cat-education" class="category-pill">📚 Education</label>
+
+                    <input type="radio" name="category" value="Rent" id="cat-rent">
+                    <label for="cat-rent" class="category-pill">🏠 Rent</label>
+
+                    <input type="radio" name="category" value="Salary" id="cat-salary">
+                    <label for="cat-salary" class="category-pill">💼 Salary</label>
+
+                    <input type="radio" name="category" value="Freelance" id="cat-freelance">
+                    <label for="cat-freelance" class="category-pill">💻 Freelance</label>
+
+                    <input type="radio" name="category" value="Investment" id="cat-investment">
+                    <label for="cat-investment" class="category-pill">📊 Investment</label>
+
+                    <input type="radio" name="category" value="Other" id="cat-other">
+                    <label for="cat-other" class="category-pill">📌 Other</label>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description">Description (optional)</label>
+                <textarea
+                    id="description"
+                    name="description"
+                    class="form-input"
+                    placeholder="What was this transaction for?"
+                    rows="3"
+                ></textarea>
+            </div>
+
+            <!-- Submit -->
+            <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+                <a href="{{ url_for('dashboard') }}" class="btn btn-secondary" style="flex: 0 0 auto;">← Back</a>
+                <button type="submit" class="btn btn-primary btn-block" id="submit-btn">
+                    Save Transaction 💰
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

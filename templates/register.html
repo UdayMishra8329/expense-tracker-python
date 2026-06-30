@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-card glass-card" style="padding: 2.5rem;">
+        <div class="auth-header">
+            <span class="auth-logo">✨</span>
+            <h1>Create Account</h1>
+            <p>Start tracking your finances today</p>
+        </div>
+
+        <form method="POST" action="{{ url_for('register') }}" autocomplete="on">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    class="form-input"
+                    placeholder="Choose a username"
+                    required
+                    autofocus
+                    minlength="3"
+                    autocomplete="username"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-input"
+                    placeholder="your@email.com"
+                    required
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="form-input"
+                    placeholder="At least 6 characters"
+                    required
+                    minlength="6"
+                    autocomplete="new-password"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    class="form-input"
+                    placeholder="Repeat your password"
+                    required
+                    minlength="6"
+                    autocomplete="new-password"
+                >
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" id="register-btn">
+                Create Account ✨
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            Already have an account?
+            <a href="{{ url_for('login') }}">Sign in</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

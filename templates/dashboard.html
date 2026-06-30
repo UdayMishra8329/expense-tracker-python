@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<!-- Hidden input for chart data API URL -->
+<input type="hidden" id="chart-data-url" value="{{ url_for('chart_data') }}">
+
+<div class="main-content">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Hello, <span class="greeting-text">{{ current_user.username }}</span> 👋</h1>
+        <p>Here's your financial overview</p>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-grid">
+        <div class="glass-card summary-card balance">
+            <div class="card-icon">💰</div>
+            <div class="card-label">Total Balance</div>
+            <div class="card-value" data-counter="{{ balance }}" data-prefix="">₹0.00</div>
+        </div>
+        <div class="glass-card summary-card income">
+            <div class="card-icon">📈</div>
+            <div class="card-label">Total Income</div>
+            <div class="card-value" data-counter="{{ total_income }}" data-prefix="">₹0.00</div>
+        </div>
+        <div class="glass-card summary-card expense">
+            <div class="card-icon">📉</div>
+            <div class="card-label">Total Expenses</div>
+            <div class="card-value" data-counter="{{ total_expense }}" data-prefix="">₹0.00</div>
+        </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-grid">
+        <div class="glass-card chart-card">
+            <h3>🍩 Spending by Category</h3>
+            <div class="chart-container">
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </div>
+        <div class="glass-card chart-card">
+            <h3>📈 Monthly Trends</h3>
+            <div class="chart-container">
+                <canvas id="monthlyChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="glass-card transactions-section">
+        <div class="section-header">
+            <h3>🕐 Recent Transactions</h3>
+            <a href="{{ url_for('add_transaction') }}" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
+                + Add New
+            </a>
+        </div>
+
+        {% if transactions %}
+        <div class="transactions-list">
+            {% for txn in transactions %}
+            <div class="transaction-item">
+                <div class="txn-icon {{ txn.type }}">
+                    {% if txn.type == 'income' %}📈{% else %}📉{% endif %}
+                </div>
+                <div class="txn-details">
+                    <div class="txn-category">{{ txn.category }}</div>
+                    <div class="txn-description">{{ txn.description or '—' }}</div>
+                </div>
+                <div class="txn-meta">
+                    <div class="txn-amount {{ txn.type }}">
+                        {% if txn.type == 'income' %}+{% else %}-{% endif %}₹{{ "%.2f"|format(txn.amount) }}
+                    </div>
+                    <div class="txn-date">{{ txn.date.strftime('%d %b %Y') }}</div>
+                </div>
+                <div class="txn-actions">
+                    <a href="{{ url_for('edit_transaction', txn_id=txn.id) }}" title="Edit">✏️</a>
+                    <form method="POST" action="{{ url_for('delete_transaction', txn_id=txn.id) }}" style="display:inline;" onsubmit="return confirm('Delete this transaction?');">
+                        <button type="submit" title="Delete">🗑️</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <span class="empty-icon">📭</span>
+            <p>No transactions yet</p>
+            <p class="hint">Click the + button to add your first one!</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Floating Action Button -->
+<a href="{{ url_for('add_transaction') }}" class="fab" title="Add transaction" id="fab-add">
+    +
+</a>
+{% endblock %}

@@ -1,9 +1,8 @@
-->Money Expense Tracker
+# Money Expense Tracker
 
-A simple and modern personal finance tracking web application built with Flask. 
-This project helps users manage their income and expenses, view financial summaries, and analyze spending trends through a clean dashboard.
+A simple and modern personal finance tracking web application built with Flask. This project helps users manage their income and expenses, view financial summaries, and analyze spending trends through a clean dashboard.
 
-->Features
+## Features
 
 - User registration and login system
 - Secure authentication using Flask-Login
@@ -17,81 +16,65 @@ This project helps users manage their income and expenses, view financial summar
   - Monthly income vs expense trends
 - Persistent data storage using SQLite
 
- ->Technologies Used :-
+## Tech Stack
 
-This project is developed using python and its supporting libraries.
+- Python
+- Flask
+- Flask-Login
+- Flask-SQLAlchemy
+- SQLite
+- HTML, CSS, and JavaScript
 
-* Python
-* Flask
-* Flask-login
-* SQLlite
-* CSS3
-* HTML5
-* JavaScript
-* Flask-SQLAlchemy(as my database)
+## Project Structure
 
- ->Project Structure:-
+- app.py - Main Flask application and routes
+- models.py - Database models for users and transactions
+- templates/ - HTML templates for login, dashboard, forms, and layout
+- static/ - CSS and JavaScript files
+- requirements.txt - Python dependencies
+- instance/ - Application instance folder
 
-Expense Tracker/
-|
-|--_pycache_/
-|    |--models.cppython-313.pyc
-|
-|--static/
-|    |--css/
-|        |--style.css
-|    |--js/
-|        |--main.js
-|--instance/
-|    |--expense_tracker.db
-|--templates/
-|    |--add_transactional.html
-|    |--base.html
-|    |--dashboard.html
-|    |--edit_transaction.html
-|    |--login.html
-|    |--register.html
-|
-|--app.py
-|--models.py
-|--requirements.txt
-|--README.md
+## Prerequisites
 
-->Prerequisite
+Make sure you have the following installed:
 
-make sure you have the following installed:
---Python 3.8 or higher 
---pip
+- Python 3.8 or higher
+- pip
 
-->Installation
+## Installation
 
 1. Clone or download the project folder.
 2. Open the project directory:
-   
+   ```bash
    cd "Money expense tracker"
-   
+   ```
 3. Create a virtual environment:
-   
+   ```bash
    python -m venv venv
-   
+   ```
 4. Activate the virtual environment:
    - On Windows:
-     
+     ```bash
      venv\Scripts\activate
-     
+     ```
+   - On macOS/Linux:
+     ```bash
+     source venv/bin/activate
+     ```
 5. Install the required packages:
-   
+   ```bash
    pip install -r requirements.txt
-   
+   ```
 6. Run the application:
-   
+   ```bash
    python app.py
-   
+   ```
 7. Open your browser and visit:
-   
+   ```text
    http://127.0.0.1:5000
+   ```
 
-->How to Use
+## How to Use
 
 1. Register a new account or log in.
 2. Add a transaction by entering:
@@ -107,19 +90,23 @@ make sure you have the following installed:
    - charts for spending analysis
 4. Edit or delete transactions anytime from the dashboard.
 
-->Database
+## Database
 
 The app uses SQLite by default. On first run, the database file named expense_tracker.db will be created automatically in the project folder.
 
-->Notes
+## Environment Variables
+
+You can customize the secret key by setting:
+
+```bash
+set SECRET_KEY=your_secret_key
+```
+
+## Notes
 
 - The app runs in debug mode by default for development.
 - If you want to stop the server, press Ctrl + C in the terminal.
 
--> License
+## License
 
 No license has been specified for this project yet.
-
-->Author
-
-UDAY MISHRA 
