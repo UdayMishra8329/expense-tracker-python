@@ -110,3 +110,6 @@ set SECRET_KEY=your_secret_key
 ## License
 
 No license has been specified for this project yet.
+
+## Author 
+UDAY MISHRA
